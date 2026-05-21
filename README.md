@@ -1,260 +1,265 @@
-<div align="center">
 
-# ⚓ e-LABSIM
-### Electronic Laboratory & Simulator Management System
+# E-Labsim — Laboratory & Simulator Scheduling Management System
 
-**Berbasis Laravel 12 | Politeknik Maritim AMI Makassar**
+> Web-based scheduling and reporting system built to digitize laboratory and simulator operations at Politeknik Maritim AMI Makassar.
 
-[![Laravel](https://img.shields.io/badge/Laravel-12.33-FF2D20?style=for-the-badge&logo=laravel&logoColor=white)](https://laravel.com)
-[![PHP](https://img.shields.io/badge/PHP-8.2+-777BB4?style=for-the-badge&logo=php&logoColor=white)](https://php.net)
-[![Node](https://img.shields.io/badge/Node.js-20.19%2B%20%7C%2022.12%2B-339933?style=for-the-badge&logo=node.js&logoColor=white)](https://nodejs.org)
-[![Livewire](https://img.shields.io/badge/Livewire-3.6.4-FB70A9?style=for-the-badge&logo=livewire&logoColor=white)](https://livewire.laravel.com)
-[![Tailwind CSS](https://img.shields.io/badge/Tailwind_CSS-v4.1.11-06B6D4?style=for-the-badge&logo=tailwindcss&logoColor=white)](https://tailwindcss.com)
-[![MySQL](https://img.shields.io/badge/MySQL-8.0+-4479A1?style=for-the-badge&logo=mysql&logoColor=white)](https://mysql.com)
-[![License](https://img.shields.io/badge/License-MIT-22c55e?style=for-the-badge)](LICENSE)
-
-> Sistem manajemen penjadwalan laboratorium dan simulator berbasis web yang dilengkapi fitur **Conflict Detection** dan **Reporting** sebagai solusi transformasi digital di Politeknik Maritim AMI Makassar.
-
-</div>
+![Laravel](https://img.shields.io/badge/Laravel-12-red)
+![PHP](https://img.shields.io/badge/PHP-8.2+-blue)
+![Livewire](https://img.shields.io/badge/Livewire-3-purple)
+![Tailwind CSS](https://img.shields.io/badge/Tailwind-v4-06b6d4)
+![MySQL](https://img.shields.io/badge/Database-MySQL-informational)
+![Vite](https://img.shields.io/badge/Vite-7-646cff)
 
 ---
 
-## 📋 Daftar Isi
+## Overview
 
-- [Tentang Proyek](#-tentang-proyek)
-- [Fitur Utama](#-fitur-utama)
-- [Tech Stack](#-tech-stack)
-- [Persyaratan Sistem](#-persyaratan-sistem)
-- [Instalasi & Setup](#-instalasi--setup)
-- [Menjalankan Aplikasi](#%EF%B8%8F-menjalankan-aplikasi)
-- [Konfigurasi Environment](#%EF%B8%8F-konfigurasi-environment)
-- [Struktur Role & Akses](#-struktur-role--akses)
-- [Struktur Direktori](#-struktur-direktori)
-- [Perintah Berguna](#-perintah-berguna)
-- [Troubleshooting](#-troubleshooting)
-- [Lisensi](#-lisensi)
+E-Labsim is a web application designed to manage laboratory and simulator scheduling more efficiently through a centralized digital workflow.
+
+The system was built to replace manual scheduling processes that are difficult to track and highly prone to conflicts. It provides structured scheduling, conflict detection, reporting, notifications, and multi-role access for different types of users.
+
+This project was developed as part of an academic/research case study at **Politeknik Maritim AMI Makassar**.
 
 ---
 
-## 🎯 Tentang Proyek
+## The Problem
 
-**e-LABSIM** adalah sistem manajemen laboratorium dan simulator elektronik yang dikembangkan sebagai solusi digitalisasi proses penjadwalan di **Politeknik Maritim AMI Makassar**. Sistem ini dirancang untuk menggantikan proses penjadwalan manual yang rawan konflik dan sulit dilacak.
+Manual scheduling usually creates several operational issues:
 
-Proyek ini merupakan bagian dari penelitian Skripsi S1 Sistem Informasi dengan judul:
+- double-booked rooms and time slots
+- instructor and resource conflicts
+- difficult tracking of schedule requests and approvals
+- limited visibility for students, operators, and instructors
+- reporting that takes too much manual work
+- scattered operational data with low traceability
 
-> *"Pengembangan Electronic Laboratory & Simulator Management System (e-LABSIM) Berbasis Laravel: Solusi Transformasi Digital Penjadwalan Melalui Implementasi Fitur Reporting dan Conflict-Detection di Politeknik Maritim AMI Makassar"*
-
----
-
-## ✨ Fitur Utama
-
-| Fitur | Deskripsi |
-|-------|-----------|
-| 📅 **Manajemen Jadwal** | Buat, edit, dan kelola jadwal penggunaan laboratorium & simulator |
-| ⚠️ **Conflict Detection** | Deteksi otomatis bentrokan jadwal (ruang, waktu, instruktur) secara real-time |
-| 📊 **Reporting** | Laporan penggunaan lab dalam format tabel & grafik, ekspor ke PDF dan Excel |
-| 🔐 **Autentikasi & Role** | Sistem login multi-role (Admin, Dosen/Instruktur, Operator, Mahasiswa) |
-| 🔔 **Notifikasi** | Notifikasi in-app untuk pengingat jadwal & status persetujuan |
+A digital scheduling system was needed to make the process more reliable, organized, and easier to monitor.
 
 ---
 
-## 🛠 Tech Stack
+## The Solution
 
-### Backend — Versi Terinstall
+E-Labsim solves this by providing:
 
-| Package | Versi | Keterangan |
-|---------|-------|------------|
-| **laravel/framework** | 12.33.0 | PHP framework utama |
-| **PHP** | ^8.2 | Server-side language |
-| **livewire/livewire** | 3.6.4 | Full-stack reactive components |
-| **livewire/flux** | 2.5.1 | UI component library resmi Livewire |
-| **livewire/volt** | 1.7.2 | Single-file Livewire components |
-| **laravel/fortify** | 1.31.1 | Backend authentication (login, register, 2FA) |
-| **laravel/tinker** | 2.10.1 | REPL interaktif untuk debugging |
-| **barryvdh/laravel-dompdf** | 3.1.1 | Ekspor laporan ke PDF |
-| **maatwebsite/excel** | 3.1.67 | Ekspor/impor data ke file Excel (.xlsx) |
-| **nesbot/carbon** | 3.10.3 | Manipulasi tanggal & waktu |
-| **guzzlehttp/guzzle** | 7.10.0 | HTTP client untuk integrasi eksternal |
+- **centralized scheduling management**
+- **real-time conflict detection** for room, time, and instructor collisions
+- **multi-role authentication and access control**
+- **operational reporting** in table and chart formats
+- **PDF and Excel export**
+- **in-app notifications** for schedule reminders and approval status
+- **modern Laravel + Livewire architecture** for a more reactive user experience
 
-### Backend — Dev Dependencies
-
-| Package | Versi | Keterangan |
-|---------|-------|------------|
-| **pestphp/pest** | 3.8.4 | Framework testing modern untuk PHP |
-| **laravel/sail** | 1.46.0 | Docker development environment |
-| **laravel/pint** | 1.25.1 | Code style fixer otomatis (PSR-12) |
-| **laravel/pail** | 1.2.3 | Log viewer real-time di terminal |
-| **fakerphp/faker** | 1.24.1 | Generate data dummy untuk seeder |
-| **barryvdh/laravel-ide-helper** | 3.6.0 | Autocomplete IDE untuk Laravel |
-
-### Frontend
-
-| Package | Versi | Keterangan |
-|---------|-------|------------|
-| **tailwindcss** | 4.1.11 | Utility-first CSS framework (v4 — tanpa config file) |
-| **@tailwindcss/vite** | 4.1.11 | Plugin Tailwind v4 untuk Vite |
-| **vite** | 7.1.9 | Asset bundler & dev server |
-| **laravel-vite-plugin** | 2.0.0 | Integrasi Vite dengan Laravel |
-| **axios** | 1.12.2 | HTTP client untuk request AJAX |
-| **sweetalert2** | 11.26.2 | Library popup/dialog/notifikasi yang elegan |
-| **autoprefixer** | 10.4.21 | PostCSS plugin vendor prefix CSS otomatis |
-| **concurrently** | 9.2.0 | Jalankan server + queue + vite dalam satu terminal |
-
-### Database
-- **MySQL** 8.0+ atau **MariaDB** 10.6+
+This makes the scheduling workflow more structured and significantly easier to manage.
 
 ---
 
-## 💻 Persyaratan Sistem
+## Key Features
 
-Pastikan laptop baru kamu sudah memiliki semua ini sebelum instalasi:
+### Scheduling
+- create, edit, and manage laboratory and simulator schedules
+- organize schedule requests through a centralized system
+- reduce manual coordination overhead
 
-| Dependensi | Versi Wajib | Cara Cek |
-|------------|-------------|----------|
-| **PHP** | ≥ 8.2 | `php --version` |
-| **Composer** | ≥ 2.x | `composer --version` |
-| **Node.js** | ≥ 20.19.0 **atau** ≥ 22.12.0 | `node --version` |
-| **NPM** | ≥ 10.x | `npm --version` |
-| **MySQL** | ≥ 8.0 | `mysql --version` |
-| **Git** | Terbaru | `git --version` |
+### Conflict Detection
+- automatically detect schedule collisions
+- validate overlapping room, time, and instructor assignments
+- help prevent operational mistakes before approval
 
-> ⚠️ **PERHATIAN — Node.js:** `vite` v7 dan `laravel-vite-plugin` v2 membutuhkan Node.js **minimal 20.19.0 atau 22.12.0+**. Node.js 18 atau Node.js 20 versi lama **pasti error**. Update dulu sebelum lanjut via **[nodejs.org/en/download](https://nodejs.org/en/download)** (pilih versi LTS terbaru).
+### Reporting
+- generate usage reports in table and chart formats
+- export reports to **PDF** and **Excel**
+- support administrative recap and monitoring
 
-> 💡 **Rekomendasi local dev environment untuk Windows:** [Laragon](https://laragon.org/) (PHP + MySQL sudah bundled, paling mudah) atau [XAMPP](https://www.apachefriends.org/). Pastikan PHP versi 8.2+ yang aktif.
+### Authentication & Roles
+- multi-role login system
+- role-based access for:
+  - Admin
+  - Operator
+  - Lecturer / Instructor
+  - Student
+
+### Notifications
+- in-app notifications for:
+  - schedule reminders
+  - approval status updates
+  - workflow-related updates
 
 ---
 
-## 🚀 Instalasi & Setup
+## Preview
 
-### Langkah 1 — Clone Repository
+> This repository focuses on the technical implementation and setup.  
+> A full visual walkthrough and case study are available in my portfolio.
+
+### Option A — GIF Preview
+![E-Labsim Demo](docs/demo/e-labsim-preview.gif)
+
+### Option B — Main Screenshot
+<!-- ![E-Labsim Preview](docs/screenshots/e-labsim-preview-main.png) -->
+
+### Portfolio & Contact
+- **Portfolio:** https://your-portfolio-link.com
+- **Contact:** your-email@example.com
+- **Project walkthrough / collaboration:** available on request
+
+---
+
+## Technical Highlights
+
+This project demonstrates more than standard CRUD development. It includes:
+
+- **real-time operational validation**
+  - schedule conflict detection across multiple dimensions
+- **reactive full-stack UI**
+  - built using Laravel + Livewire
+- **report generation**
+  - export to PDF and Excel
+- **multi-role workflow**
+  - different interfaces and actions for different user types
+- **notification-ready architecture**
+  - supports scheduling and approval communication
+- **production-oriented setup**
+  - authentication, queue support, testing, file storage, and environment configuration
+
+---
+
+## Workflow
+
+### Basic Scheduling Flow
+1. User logs into the system based on role
+2. A schedule request or schedule entry is created
+3. The system checks for possible conflicts
+4. If no conflict is detected, the schedule can proceed
+5. Relevant users can review status and updates
+6. Reports can be generated for recap and monitoring
+
+### Role Perspective
+- **Admin** → full access to all features and user management
+- **Operator** → manage schedules and print reports
+- **Lecturer / Instructor** → submit and view schedules
+- **Student** → view schedule and booking status
+
+---
+
+## Architecture Snapshot
+
+```bash
+app/
+├── Http/
+│   ├── Controllers/
+│   └── Middleware/
+├── Livewire/
+├── Models/
+├── Providers/
+database/
+├── migrations/
+└── seeders/
+resources/
+├── views/
+│   └── livewire/
+├── css/
+│   └── app.css
+└── js/
+    └── app.js
+routes/
+└── web.php
+tests/
+````
+
+### Important Technical Areas
+
+* `Livewire/` → interactive scheduling interface and reactive components
+* `Http/Middleware/` → auth and role restrictions
+* `database/seeders/` → default role/user initialization
+* `resources/views/livewire/` → UI layer for Livewire-based pages
+* `tests/` → automated testing with Pest PHP
+
+---
+
+## Tech Stack
+
+| Layer                | Technology               |
+| -------------------- | ------------------------ |
+| Backend              | Laravel 12               |
+| Language             | PHP 8.2+                 |
+| Reactive UI          | Livewire 3               |
+| UI Library           | Livewire Flux            |
+| Component Syntax     | Livewire Volt            |
+| Authentication       | Laravel Fortify          |
+| Styling              | Tailwind CSS v4          |
+| Build Tool           | Vite 7                   |
+| JavaScript Utilities | Axios, SweetAlert2       |
+| Reporting            | DomPDF                   |
+| Excel Export         | Maatwebsite Excel        |
+| Database             | MySQL 8+ / MariaDB 10.6+ |
+| Testing              | Pest PHP                 |
+
+---
+
+## Why This Project Matters
+
+This project demonstrates my ability to build:
+
+* scheduling systems for real operational use
+* conflict-aware workflows
+* multi-role access control
+* reporting dashboards and exports
+* admin-oriented information systems
+* structured internal tools for institutions or organizations
+
+It reflects the type of application often needed by campuses, training centers, labs, internal business operations, and service organizations.
+
+---
+
+## System Requirements
+
+Make sure your environment includes:
+
+* PHP >= 8.2
+* Composer >= 2.x
+* Node.js >= 20.19.0 or >= 22.12.0
+* NPM >= 10.x
+* MySQL >= 8.0
+* Git
+
+> Important: Vite v7 and `laravel-vite-plugin` v2 require a recent Node.js version. Older Node versions may fail during install/build.
+
+---
+
+## Installation
+
+### 1. Clone Repository
 
 ```bash
 git clone https://github.com/Azemux26/E-Labsim.git
 cd E-Labsim
 ```
 
----
-
-### Langkah 2 — Siapkan Database
-
-Buka phpMyAdmin atau MySQL client, lalu buat database baru:
+### 2. Create Database
 
 ```sql
 CREATE DATABASE e_labsim CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
 ```
 
----
-
-### Langkah 3 — Salin File Environment
+### 3. Copy Environment File
 
 ```bash
-# Windows (Command Prompt / PowerShell)
+# Windows
 copy .env.example .env
 
 # Mac / Linux
 cp .env.example .env
 ```
 
-Buka file `.env` lalu sesuaikan bagian database:
-
-```env
-DB_CONNECTION=mysql
-DB_HOST=127.0.0.1
-DB_PORT=3306
-DB_DATABASE=e_labsim      # ← nama database yang dibuat di langkah 2
-DB_USERNAME=root           # ← sesuaikan
-DB_PASSWORD=               # ← kosongkan jika tidak ada password
-```
-
----
-
-### Langkah 4 — Install Semua Dependensi
-
-```bash
-# Install dependensi PHP
-composer install
-
-# Install dependensi JavaScript
-npm install
-```
-
----
-
-### Langkah 5 — Generate Application Key
-
-```bash
-php artisan key:generate
-```
-
-> Perintah ini mengisi nilai `APP_KEY` di file `.env` secara otomatis. Wajib dijalankan sekali.
-
----
-
-### Langkah 6 — Migrasi Database & Isi Data Awal
-
-```bash
-php artisan migrate:fresh --seed
-```
-
-> `migrate:fresh --seed` = buat semua tabel dari awal + isi data awal (seeder).
-> Gunakan perintah ini hanya saat **setup pertama kali**. Untuk laptop yang sudah pernah pakai project ini, gunakan `php artisan migrate` saja agar data tidak terhapus.
-
----
-
-### Langkah 7 — Buat Symbolic Link Storage
-
-```bash
-php artisan storage:link
-```
-
-> Menghubungkan `storage/app/public` ke `public/storage` agar file upload bisa diakses dari browser.
-
----
-
-### Langkah 8 — Build Asset Frontend
-
-```bash
-npm run build
-```
-
-> Project menggunakan **Tailwind CSS v4** yang **tidak memerlukan** `tailwind.config.js`. Jangan buat file tersebut secara manual — sudah ditangani otomatis oleh plugin `@tailwindcss/vite`.
-
----
-
-## ▶️ Menjalankan Aplikasi
-
-Setelah setup selesai, jalankan **satu perintah** ini:
-
-```bash
-composer run dev
-```
-
-Perintah ini otomatis menjalankan tiga proses bersamaan (via Concurrently):
-
-| Proses | Perintah | Fungsi |
-|--------|----------|--------|
-| 🌐 Web Server | `php artisan serve` | Menjalankan aplikasi |
-| 📬 Queue Worker | `php artisan queue:listen` | Memproses notifikasi & job |
-| ⚡ Vite Dev Server | `npm run dev` | Hot reload CSS/JS |
-
-Buka browser dan akses: **[http://127.0.0.1:8000](http://127.0.0.1:8000)**
-
-> Untuk menghentikan semua proses, tekan `Ctrl + C` di terminal.
-
----
-
-## ⚙️ Konfigurasi Environment
-
-Bagian-bagian penting di file `.env` yang perlu diperhatikan:
+### 4. Configure `.env`
 
 ```env
 APP_NAME="e-LABSIM"
 APP_ENV=local
-APP_KEY=base64:...          # Terisi otomatis setelah php artisan key:generate
+APP_KEY=
 APP_DEBUG=true
 APP_URL=http://localhost:8000
 
-# ── Database ─────────────────────────────────────────
 DB_CONNECTION=mysql
 DB_HOST=127.0.0.1
 DB_PORT=3306
@@ -262,183 +267,212 @@ DB_DATABASE=e_labsim
 DB_USERNAME=root
 DB_PASSWORD=
 
-# ── Queue (WAJIB 'database' agar notifikasi berjalan) ─
 QUEUE_CONNECTION=database
-
-# ── Session ───────────────────────────────────────────
 SESSION_DRIVER=database
 SESSION_LIFETIME=120
-
-# ── Email / Notifikasi ────────────────────────────────
-# Untuk development, gunakan Mailtrap (gratis): https://mailtrap.io
-MAIL_MAILER=smtp
-MAIL_HOST=sandbox.smtp.mailtrap.io
-MAIL_PORT=2525
-MAIL_USERNAME=             # Isi dari dashboard Mailtrap kamu
-MAIL_PASSWORD=             # Isi dari dashboard Mailtrap kamu
-MAIL_ENCRYPTION=null
-MAIL_FROM_ADDRESS="noreply@e-labsim.com"
-MAIL_FROM_NAME="${APP_NAME}"
 ```
 
----
-
-## 👥 Struktur Role & Akses
-
-Setelah `migrate:fresh --seed`, akun berikut tersedia untuk login:
-
-| Role | Email | Password | Akses |
-|------|-------|----------|-------|
-| **Admin** | admin@e-labsim.com | password | Full akses semua fitur & manajemen user |
-| **Operator** | operator@e-labsim.com | password | Kelola jadwal & cetak laporan |
-| **Dosen/Instruktur** | dosen@e-labsim.com | password | Ajukan & lihat jadwal |
-| **Mahasiswa** | mahasiswa@e-labsim.com | password | Lihat jadwal & status booking |
-
-> ⚠️ Sesuaikan tabel di atas dengan isi sebenarnya di `database/seeders/`. Ganti semua password default segera setelah login pertama kali di environment production.
-
----
-
-## 📁 Struktur Direktori
-
-```
-E-Labsim/
-├── app/
-│   ├── Http/
-│   │   ├── Controllers/        # Controller utama
-│   │   └── Middleware/         # Auth & role middleware
-│   ├── Livewire/               # Livewire components
-│   ├── Models/                 # Eloquent Models
-│   └── Providers/              # Service providers
-├── database/
-│   ├── migrations/             # Skema tabel database
-│   └── seeders/                # Data awal aplikasi
-├── resources/
-│   ├── views/
-│   │   └── livewire/           # Blade views untuk Livewire components
-│   ├── css/
-│   │   └── app.css             # Entry point Tailwind CSS v4
-│   └── js/
-│       └── app.js              # Entry point JS (Axios, SweetAlert2)
-├── routes/
-│   └── web.php                 # Semua route aplikasi
-├── storage/
-│   └── app/public/             # File upload (dilink ke public/storage)
-├── tests/                      # Test files (Pest PHP)
-├── .env.example                # Template konfigurasi — JANGAN dihapus
-├── composer.json               # Dependensi PHP & composer scripts
-├── package.json                # Dependensi Node.js
-├── vite.config.js              # Konfigurasi Vite + Tailwind
-└── README.md
-```
-
----
-
-## 🧪 Menjalankan Test
-
-Project ini menggunakan **Pest PHP** v3 sebagai testing framework.
+### 5. Install Dependencies
 
 ```bash
-# Jalankan semua test (via composer script — config:clear otomatis)
+composer install
+npm install
+```
+
+### 6. Generate Application Key
+
+```bash
+php artisan key:generate
+```
+
+### 7. Run Migration and Seeder
+
+```bash
+php artisan migrate:fresh --seed
+```
+
+> Use `migrate:fresh --seed` only for first-time setup or when you intentionally want to reset the database.
+
+### 8. Create Storage Link
+
+```bash
+php artisan storage:link
+```
+
+### 9. Build Frontend Assets
+
+```bash
+npm run build
+```
+
+---
+
+## Running the Project
+
+### Development
+
+```bash
+composer run dev
+```
+
+This command runs:
+
+* Laravel web server
+* queue listener
+* Vite development server
+
+Then open:
+
+```bash
+http://127.0.0.1:8000
+```
+
+### Useful Alternatives
+
+```bash
+php artisan serve
+php artisan queue:listen
+npm run dev
+```
+
+---
+
+## Seeded Roles
+
+If you use the included seeders, the system is designed around these roles:
+
+* **Admin**
+* **Operator**
+* **Lecturer / Instructor**
+* **Student**
+
+> Adjust any default credentials based on your actual `database/seeders/` files before publishing or deploying.
+
+---
+
+## Testing
+
+This project uses **Pest PHP** for automated testing.
+
+### Run all tests
+
+```bash
 composer run test
+```
 
-# Atau langsung via artisan
+### Or run via artisan
+
+```bash
 php artisan test
+```
 
-# Jalankan test tertentu
+### Run specific tests
+
+```bash
 php artisan test --filter=NamaTest
 ```
 
 ---
 
-## 🔧 Perintah Berguna
+## Useful Commands
+
+### Application
 
 ```bash
-# ── Menjalankan Aplikasi ──────────────────────────────
-composer run dev                   # Server + Queue + Vite (DIREKOMENDASIKAN)
-php artisan serve                  # Hanya web server saja
+composer run dev
+php artisan serve
+```
 
-# ── Database ─────────────────────────────────────────
-php artisan migrate                # Jalankan migrasi baru
-php artisan migrate:fresh --seed   # Reset total & isi data awal
-php artisan migrate:rollback       # Batalkan migrasi terakhir
-php artisan db:seed                # Jalankan ulang seeder saja
+### Database
 
-# ── Cache & Config ────────────────────────────────────
+```bash
+php artisan migrate
+php artisan migrate:fresh --seed
+php artisan migrate:rollback
+php artisan db:seed
+```
+
+### Cache / Config
+
+```bash
 php artisan cache:clear
 php artisan config:clear
 php artisan view:clear
 php artisan route:clear
+```
 
-# ── Generate File ─────────────────────────────────────
-php artisan make:model NamaModel -mcr     # Model + Migration + Controller
-php artisan make:livewire NamaComponent   # Livewire component baru
-php artisan make:migration nama_tabel     # File migration baru
+### Generate Files
 
-# ── Info & Debug ─────────────────────────────────────
-php artisan route:list             # Lihat semua route terdaftar
-php artisan about                  # Info versi Laravel & environment
-composer show --installed          # Lihat semua package PHP terinstall
+```bash
+php artisan make:model NamaModel -mcr
+php artisan make:livewire NamaComponent
+php artisan make:migration nama_tabel
+```
+
+### Debug / Info
+
+```bash
+php artisan route:list
+php artisan about
+composer show --installed
 ```
 
 ---
 
-## ❓ Troubleshooting
+## Troubleshooting
 
-**Q: Error saat `npm install` — "engine" atau "unsupported engine"**
-```
-Node.js kamu terlalu lama. Wajib versi ≥ 20.19.0 atau ≥ 22.12.0.
-```
+### `npm install` engine / unsupported engine error
+
+Your Node.js version is too old.
+
 ```bash
-node --version   # Cek versi sekarang
-# Update via https://nodejs.org atau via nvm:
+node --version
 nvm install 22 && nvm use 22
 npm install
 ```
 
----
+### White page / 500 error after clone
 
-**Q: Halaman putih / Error 500 setelah clone**
 ```bash
-php artisan key:generate          # 1. APP_KEY harus ada
-php artisan config:clear          # 2. Hapus cache config lama
-php artisan migrate:fresh --seed  # 3. Pastikan tabel sudah dibuat
-npm run build                     # 4. Build asset CSS/JS
+php artisan key:generate
+php artisan config:clear
+php artisan migrate:fresh --seed
+npm run build
 ```
 
----
+### No CSS / broken styling
 
-**Q: Tampilan berantakan / tidak ada CSS sama sekali**
 ```bash
 npm run build
-# Atau jalankan composer run dev dan pastikan Vite dev server aktif
 ```
 
----
+Or run:
 
-**Q: `queue:listen` error — tabel `jobs` tidak ada**
 ```bash
-# Pastikan QUEUE_CONNECTION=database di .env, lalu:
+composer run dev
+```
+
+### Queue error — `jobs` table not found
+
+```bash
 php artisan queue:table
 php artisan migrate
 ```
 
----
+### Uploaded files are not accessible
 
-**Q: File upload / gambar tidak bisa diakses**
 ```bash
 php artisan storage:link
 ```
 
----
+### Autoload / class not found error
 
-**Q: Error `Class not found` atau autoload error**
 ```bash
 composer dump-autoload
 ```
 
----
+### Linux / Mac permission issue
 
-**Q: Error permission di Linux/Mac**
 ```bash
 chmod -R 775 storage bootstrap/cache
 chown -R www-data:www-data storage bootstrap/cache
@@ -446,18 +480,35 @@ chown -R www-data:www-data storage bootstrap/cache
 
 ---
 
-## 📄 Lisensi
+## Future Improvements
 
-Proyek ini dikembangkan untuk keperluan akademik (Skripsi S1) di **Program Studi Sistem Informasi, Politeknik Maritim AMI Makassar**.
-
-Didistribusikan di bawah [MIT License](LICENSE).
+* calendar-style schedule visualization
+* approval workflow enhancements
+* email notification integration
+* dashboard analytics for room utilization
+* institution-wide resource management expansion
+* API layer for mobile or third-party integration
 
 ---
 
-<div align="center">
+## Author
 
-**Dikembangkan dengan ❤️ untuk Politeknik Maritim AMI Makassar**
+**Rafli**
+Backend Web Developer focused on Laravel-based information systems, scheduling workflows, and admin dashboards.
 
-*© 2025 — e-LABSIM Project*
+* GitHub: [https://github.com/Azemux26](https://github.com/Azemux26)
+* Portfolio: [https://your-portfolio-link.com](https://your-portfolio-link.com)
+* Email: [your-email@example.com](mailto:your-email@example.com)
 
-</div>
+---
+
+## License
+
+This project was developed for academic/research purposes at Politeknik Maritim AMI Makassar and is distributed under the MIT License.
+
+```
+
+
+```
+
+[1]: https://github.com/Azemux26/E-Labsim "GitHub - Azemux26/E-Labsim · GitHub"
